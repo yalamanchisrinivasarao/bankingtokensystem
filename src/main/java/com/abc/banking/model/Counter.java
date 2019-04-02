@@ -1,6 +1,5 @@
 package com.abc.banking.model;
 
-import lombok.Data;
 
 import javax.persistence.*;
 
@@ -9,7 +8,6 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "counter")
-@Data
 public class Counter {
 
     public enum Priority {

@@ -3,6 +3,7 @@ package com.abc.banking.exception;
 /**
  * Created by Srinivasa.
  */
+@SuppressWarnings("serial")
 public class BusinessException extends RuntimeException {
 
     public enum ErrorCode {
@@ -12,7 +13,8 @@ public class BusinessException extends RuntimeException {
         INVALID_TOKEN(3001, "Token is invalid"),
         INVALID_TOKEN_STATE(3002, "Token not active");
 
-        private int code;
+        @SuppressWarnings("unused")
+		private int code;
         private String message;
 
         ErrorCode(int code, String message) {

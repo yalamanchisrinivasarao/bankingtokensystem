@@ -39,7 +39,7 @@ public class Token {
 
     @ManyToOne
     @JoinColumn(name = "current_service_id")
-    private Service currentService;
+    private ServiceEntity currentService;
 
     @Enumerated(EnumType.STRING)
     @NotNull
@@ -88,11 +88,11 @@ public class Token {
 		this.currentCounter = currentCounter;
 	}
 
-	public Service getCurrentService() {
+	public ServiceEntity getCurrentService() {
 		return currentService;
 	}
 
-	public void setCurrentService(Service currentService) {
+	public void setCurrentService(ServiceEntity currentService) {
 		this.currentService = currentService;
 	}
 

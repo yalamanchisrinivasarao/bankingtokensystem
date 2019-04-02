@@ -1,6 +1,6 @@
 package com.abc.banking.dao;
 
-import com.abc.banking.model.Service;
+import com.abc.banking.model.ServiceEntity;
 import org.springframework.data.repository.CrudRepository;
 
 import javax.transaction.Transactional;
@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
  * @author Srinivasa
  */
 @Transactional
-public interface ServiceDao extends CrudRepository<Service, Long> {
+public interface ServiceDao extends CrudRepository<ServiceEntity, Long> {
 
-    Service findByName(String name);
+    ServiceEntity findByName(String name);
 }

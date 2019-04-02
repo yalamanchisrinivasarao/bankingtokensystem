@@ -7,6 +7,15 @@ drop table  if exists counter;
 drop table  if exists service;
 drop table  if exists customer;
 drop table  if exists address;
+drop table if exists userDetails;
+
+CREATE TABLE `userDetails` (
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(100) NOT NULL,
+  PRIMARY KEY NONCLUSTERED (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `address` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -92,6 +101,9 @@ CREATE TABLE `token_service_mapping` (
   CONSTRAINT `FK_tnaur3gcarua7he418wdytlnb` FOREIGN KEY (`token_id`) REFERENCES `token` (`id`)
 ) ENGINE=InnoDB;
 
+
+insert into userDetails values ('user1','password','USER');
+insert into userDetails values ('admin1','password','ADMIN');
 
 insert into counter values (null, 1, 'HIGH', 0);
 insert into counter values (null, 2, 'HIGH', 0);

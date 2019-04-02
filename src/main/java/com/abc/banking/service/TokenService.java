@@ -91,15 +91,23 @@ public class TokenService {
     }
 
     
-    public void markTokenAsCancel(Integer tokenNumber) {
+    public String markTokenAsCancel(Integer tokenNumber) {
         Token token = checkTokenValidity(tokenNumber);
         Counter counter = token.getCurrentCounter();
         counterService.decrmentQueueSize(counter.getId());
         token.setStatusCode(Token.StatusCode.CANCELLED);
+        if(token.getStatusCode().equals(Token.StatusCode.CANCELLED))
+        {
+        	return "Token cancelled " + token.getNumber();
+        }
+        else 
+        {
+        	return "Token cancel failed " + token.getNumber();
+        }
     }
 
 
-    public void markTokenAsComplete(Integer tokenNumber) {
+    public String markTokenAsComplete(Integer tokenNumber) {
         Token token = checkTokenValidity(tokenNumber);
         Counter counter = token.getCurrentCounter();
         counterService.decrmentQueueSize(counter.getId());
@@ -120,6 +128,14 @@ public class TokenService {
             token.setCurrentCounter(nextCounter);
         } else {
             token.setStatusCode(Token.StatusCode.COMPLETED);
+        }
+        if(token.getStatusCode().equals(Token.StatusCode.COMPLETED)) 
+        {
+        	return "Token completed or sent to next counter " + token.getNumber();
+        }
+        else
+        {
+        	return "Token complete failed " + token.getNumber();
         }
     }
 

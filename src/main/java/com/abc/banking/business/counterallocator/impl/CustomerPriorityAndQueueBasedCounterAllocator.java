@@ -37,7 +37,7 @@ public class CustomerPriorityAndQueueBasedCounterAllocator implements CounterAll
     }
 
     @Override
-    public Counter allocate(Service service, Customer customer) {
+    public Counter allocate(ServiceEntity service, Customer customer) {
         List<Counter> counters = getServiceCountersBasedOnCustomerPriority(service, customer);
         if (!counters.isEmpty()) {
             // Allocate counter with minimum queue size
@@ -55,7 +55,7 @@ public class CustomerPriorityAndQueueBasedCounterAllocator implements CounterAll
         return null;
     }
 
-    private List<Counter> getServiceCountersBasedOnCustomerPriority(Service service, Customer customer) {
+    private List<Counter> getServiceCountersBasedOnCustomerPriority(ServiceEntity service, Customer customer) {
         List<Counter> counters = Collections.emptyList();
         switch (customer.getType()) {
             case PREMIUM:
