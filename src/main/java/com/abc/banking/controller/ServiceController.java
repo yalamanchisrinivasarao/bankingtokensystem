@@ -1,7 +1,7 @@
 package com.abc.banking.controller;
 
-import com.abc.banking.dao.ServiceDao;
-import com.abc.banking.model.Service;
+import com.abc.banking.service.ServiceService;
+import com.abc.banking.model.ServiceEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,20 +17,13 @@ import java.util.List;
 public class ServiceController {
 
     @Autowired
-    private ServiceDao serviceDao;
+    private ServiceService serviceService;
 
     @RequestMapping(value = "/services", method = RequestMethod.GET)
-    public List<Service> getAll() {
-        List<Service> services = new ArrayList<>();
-        serviceDao.findAll().forEach(services::add);
+    public List<ServiceEntity> getAll() {
+        List<ServiceEntity> services = new ArrayList<>();
+        serviceService.getAllServices().forEach(services::add);
         return services;
     }
 
-    public Service findByName(String name) {
-        return serviceDao.findByName(name);
-    }
-
-    public Service findById(long id) {
-        return serviceDao.findOne(id);
-    }
 }

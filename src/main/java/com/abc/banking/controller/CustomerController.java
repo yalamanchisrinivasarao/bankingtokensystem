@@ -1,6 +1,6 @@
 package com.abc.banking.controller;
 
-import com.abc.banking.dao.CustomerDao;
+import com.abc.banking.service.CustomerService;
 import com.abc.banking.exception.BusinessException;
 import com.abc.banking.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +17,22 @@ import java.util.Date;
 public class CustomerController {
 
     @Autowired
-    private CustomerDao customerDao;
+    private CustomerService customerService;
 
     @RequestMapping("/customers/{mobile}")
     public Customer findByMobile(@PathVariable("mobile") @NotNull String mobile) {
-        return customerDao.findByMobile(mobile);
+        return customerService.findByMobile(mobile);
     }
 
     @RequestMapping(value = "/customers", method = RequestMethod.POST)
     public Customer create(@RequestBody @NotNull @Valid Customer customer) {
-        Customer existing = customerDao.findByMobile(customer.getMobile());
+        Customer existing = customerService.findByMobile(customer.getMobile());
         if (existing != null) {
             throw new BusinessException(BusinessException.ErrorCode.DUPLICATE_CUSTOMER);
         }
         customer.setCreated(new Date());
         customer.getAddress().setName(customer.getName());
         customer.getAddress().setCreated(new Date());
-        return customerDao.save(customer);
+        return customerService.createCustomer(customer);
     }
 }

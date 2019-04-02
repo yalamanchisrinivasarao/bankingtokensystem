@@ -8,7 +8,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index() {
-        return "Turvo Banking Token System :)";
+        return "Turvo Banking Token System..";
     }
 
 }
