@@ -32,8 +32,6 @@ Import as *Existing Maven Project* and run it as *Spring Boot App*.
 ### Usage
 
 - Run the application and go on http://localhost:8080/
-- Sample APIs are present in the Postman collection given below:
-https://www.getpostman.com/collections/40e944a6fd4d741935a3
 
 ### Resources
 
@@ -71,12 +69,3 @@ While issuing a token, the systems identifies all the services that need to be s
 ### Token Sequence Generation
 
 A Simple date based sequential generator has been used. The sequence gets reset at 00 hours everyday.
-
-
-## Pending
-
-- Test cases
-- Branch need to add
-
-
-
