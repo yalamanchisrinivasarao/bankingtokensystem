@@ -62,9 +62,9 @@ public class TokenService {
             }
             tokenServices.add(new TokenServiceMapping(token, service));
             while (service.getNextServiceId() != null) {
-                ServiceEntity nextService = serviceService.findById(service.getNextServiceId());
-                tokenServices.add(new TokenServiceMapping(token, nextService));
-                service = nextService;
+                Optional<ServiceEntity> nextService = serviceService.findById(service.getNextServiceId());
+                tokenServices.add(new TokenServiceMapping(token, nextService.get()));
+                service = nextService.get();
             }
         }
         token.setTokenServices(tokenServices);

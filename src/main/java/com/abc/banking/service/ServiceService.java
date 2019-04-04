@@ -2,6 +2,7 @@ package com.abc.banking.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class ServiceService {
         return serviceDao.findByName(name);
     }
 
-    public ServiceEntity findById(long id) {
-        return serviceDao.findOne(id);
+    public Optional<ServiceEntity> findById(long id) {
+        return serviceDao.findById(id);
     }
 }

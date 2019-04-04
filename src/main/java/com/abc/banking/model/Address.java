@@ -17,9 +17,6 @@ public class Address {
     private long id;
 
     @NotNull
-    private String name;
-
-    @NotNull
     private String addressLine1;
 
     private String addressLine2;
@@ -42,14 +39,6 @@ public class Address {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getAddressLine1() {

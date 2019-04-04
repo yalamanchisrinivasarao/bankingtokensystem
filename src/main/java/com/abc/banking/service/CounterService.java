@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Srinivasa
@@ -23,12 +24,12 @@ public class CounterService {
     }
 
     public synchronized void incrementQueueSize(long counterId) {
-        Counter counter = counterDao.findOne(counterId);
-        counter.setQueueSize(counter.getQueueSize() + 1);
+        Optional<Counter> counter = counterDao.findById(counterId);
+        counter.get().setQueueSize(counter.get().getQueueSize() + 1);
     }
 
     public synchronized void decrmentQueueSize(long counterId) {
-        Counter counter = counterDao.findOne(counterId);
-        counter.setQueueSize(counter.getQueueSize() - 1);
+        Optional<Counter> counter = counterDao.findById(counterId);
+        counter.get().setQueueSize(counter.get().getQueueSize() - 1);
     }
 }

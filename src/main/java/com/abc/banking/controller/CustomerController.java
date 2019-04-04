@@ -23,19 +23,23 @@ public class CustomerController {
     @Secured({"USER", "ADMIN"})
     @RequestMapping("/customers/{mobile}")
     public Customer findByMobile(@PathVariable("mobile") @NotNull String mobile) {
-        return customerService.findByMobile(mobile);
+        return findByMobileNumber(mobile);
     }
 
     @Secured({"USER", "ADMIN"})
     @RequestMapping(value = "/customers", method = RequestMethod.POST)
     public Customer create(@RequestBody @NotNull @Valid Customer customer) {
-        Customer existing = customerService.findByMobile(customer.getMobile());
+        Customer existing = findByMobileNumber(customer.getMobile());
         if (existing != null) {
             throw new BusinessException(BusinessException.ErrorCode.DUPLICATE_CUSTOMER);
         }
         customer.setCreated(new Date());
-        customer.getAddress().setName(customer.getName());
-        customer.getAddress().setCreated(new Date());
+        customer.getAddress().setCreated(customer.getCreated());
         return customerService.createCustomer(customer);
+    }
+    
+    private Customer findByMobileNumber(String mobileNumber) {
+    	return customerService.findByMobile(mobileNumber);
+    	
     }
 }

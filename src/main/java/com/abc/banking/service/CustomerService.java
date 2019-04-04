@@ -26,8 +26,7 @@ public class CustomerService {
             throw new BusinessException(BusinessException.ErrorCode.DUPLICATE_CUSTOMER);
         }
         customer.setCreated(new Date());
-        customer.getAddress().setName(customer.getName());
-        customer.getAddress().setCreated(new Date());
+        customer.getAddress().setCreated(customer.getCreated());
         return customerDao.save(customer);
     }
 }

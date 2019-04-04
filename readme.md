@@ -76,8 +76,6 @@ A Simple date based sequential generator has been used. The sequence gets reset 
 ## Pending
 
 - Test cases
-- Authorization: Role based access for updating tokens
-- Entities needs to be changed
 - Branch need to add
 
 

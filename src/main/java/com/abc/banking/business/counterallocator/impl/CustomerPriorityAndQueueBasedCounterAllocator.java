@@ -44,7 +44,7 @@ public class CustomerPriorityAndQueueBasedCounterAllocator implements CounterAll
             int minQueueSize = Integer.MAX_VALUE;
             Counter allocatedCounter = null;
             for (Counter counter : counters) {
-                int queueSize = counterDao.findOne(counter.getId()).getQueueSize();
+                int queueSize = counterDao.findById(counter.getId()).get().getQueueSize();
                 if (queueSize < minQueueSize) {
                     minQueueSize = queueSize;
                     allocatedCounter = counter;
