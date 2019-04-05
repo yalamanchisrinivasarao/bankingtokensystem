@@ -23,13 +23,19 @@ public class CounterService {
         return counters;
     }
 
-    public synchronized void incrementQueueSize(long counterId) {
+    public void incrementQueueSize(long counterId) {
         Optional<Counter> counter = counterDao.findById(counterId);
-        counter.get().setQueueSize(counter.get().getQueueSize() + 1);
+        synchronized(this) 
+        {
+        	counter.get().setQueueSize(counter.get().getQueueSize() + 1);
+        }
     }
 
-    public synchronized void decrmentQueueSize(long counterId) {
+    public void decrmentQueueSize(long counterId) {
         Optional<Counter> counter = counterDao.findById(counterId);
-        counter.get().setQueueSize(counter.get().getQueueSize() - 1);
+        synchronized(this)
+        {
+        	counter.get().setQueueSize(counter.get().getQueueSize() - 1);
+        }
     }
 }

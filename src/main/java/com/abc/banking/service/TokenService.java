@@ -2,7 +2,6 @@ package com.abc.banking.service;
 
 import com.abc.banking.business.counterallocator.CounterAllocator;
 import com.abc.banking.business.sequencegenerator.SequenceGenerator;
-import com.abc.banking.controller.TokenController.TokenRequest;
 import com.abc.banking.dao.TokenDao;
 import com.abc.banking.exception.BusinessException;
 import com.abc.banking.model.*;
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -47,6 +47,7 @@ public class TokenService {
         return counterToTokens;
     }
 
+    @Transactional
     public Integer createToken(TokenRequest tokenRequest) {
         Customer customer = customerService.findByMobile(tokenRequest.getCustomerMobile());
         if (customer == null) {
@@ -73,14 +74,14 @@ public class TokenService {
         token.setCustomer(customer);
         token.setCurrentService(tokenServices.get(0).getService());
         Counter counter = counterAllocator.allocate(tokenServices.get(0).getService(), customer);
-        counterService.incrementQueueSize(counter.getId());
         token.setCurrentCounter(counter);
         token = tokenDao.save(token);
+        counterService.incrementQueueSize(counter.getId());
         return token.getNumber();
     }
 
-
-    public void createTokenComment(Integer tokenNumber, String comments) {
+    @Transactional
+    public String createTokenComment(int tokenNumber, String comments) {
         Token token = checkTokenValidity(tokenNumber);
         TokenServiceMapping current =
                 token.getTokenServices()
@@ -88,26 +89,27 @@ public class TokenService {
                         .filter(tsm -> tsm.getService().getId() == token.getCurrentService().getId())
                         .findFirst().get();
         current.setComments(comments);
+        return "Comment added for token " + token.getNumber();
     }
 
-    
-    public String markTokenAsCancel(Integer tokenNumber) {
+    @Transactional
+    public String markTokenAsCancel(int tokenNumber) {
         Token token = checkTokenValidity(tokenNumber);
         Counter counter = token.getCurrentCounter();
         counterService.decrmentQueueSize(counter.getId());
         token.setStatusCode(Token.StatusCode.CANCELLED);
         if(token.getStatusCode().equals(Token.StatusCode.CANCELLED))
         {
-        	return "Token cancelled " + token.getNumber();
+        	return "Token cancelled";
         }
         else 
         {
-        	return "Token cancel failed " + token.getNumber();
+        	return "Token cancel failed";
         }
     }
 
-
-    public String markTokenAsComplete(Integer tokenNumber) {
+    @Transactional
+    public String markTokenAsComplete(int tokenNumber) {
         Token token = checkTokenValidity(tokenNumber);
         Counter counter = token.getCurrentCounter();
         counterService.decrmentQueueSize(counter.getId());
@@ -131,15 +133,15 @@ public class TokenService {
         }
         if(token.getStatusCode().equals(Token.StatusCode.COMPLETED)) 
         {
-        	return "Token completed or sent to next counter " + token.getNumber();
+        	return "Token " + token.getNumber() + " completed or sent to next counter ";
         }
         else
         {
-        	return "Token complete failed " + token.getNumber();
+        	return "Token " + token.getNumber() + " complete failed ";
         }
     }
 
-    private Token checkTokenValidity(@PathVariable("number") @NotNull Integer tokenNumber) {
+    private Token checkTokenValidity(@PathVariable("number") @NotNull int tokenNumber) {
         Token token = tokenDao.findByNumber(tokenNumber);
         if (token == null) {
             throw new BusinessException(BusinessException.ErrorCode.INVALID_TOKEN);
