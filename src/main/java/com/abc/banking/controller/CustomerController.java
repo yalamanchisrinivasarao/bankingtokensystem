@@ -21,7 +21,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @Secured({"USER", "ADMIN"})
-    @RequestMapping("/customers/{mobile}")
+    @RequestMapping(value="/customers/{mobile}", method = RequestMethod.GET)
     public Customer findByMobile(@PathVariable("mobile") @NotNull String mobile) {
         return findByMobileNumber(mobile);
     }

@@ -17,16 +17,21 @@ public class CustomerService {
     private CustomerDao customerDao;
 
     public Customer findByMobile(String mobile) {
-        return customerDao.findByMobile(mobile);
+        return findCustomerByMobile(mobile);
     }
 
     public Customer createCustomer(Customer customer) {
-        Customer existing = customerDao.findByMobile(customer.getMobile());
+        Customer existing = findCustomerByMobile(customer.getMobile());
         if (existing != null) {
             throw new BusinessException(BusinessException.ErrorCode.DUPLICATE_CUSTOMER);
         }
         customer.setCreated(new Date());
         customer.getAddress().setCreated(customer.getCreated());
         return customerDao.save(customer);
+    }
+    
+    private Customer findCustomerByMobile(String mobile)
+    {
+    	return customerDao.findByMobile(mobile);
     }
 }

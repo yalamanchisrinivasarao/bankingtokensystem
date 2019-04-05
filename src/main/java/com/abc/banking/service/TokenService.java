@@ -96,8 +96,8 @@ public class TokenService {
     public String markTokenAsCancel(int tokenNumber) {
         Token token = checkTokenValidity(tokenNumber);
         Counter counter = token.getCurrentCounter();
-        counterService.decrmentQueueSize(counter.getId());
         token.setStatusCode(Token.StatusCode.CANCELLED);
+        counterService.decrmentQueueSize(counter.getId());
         if(token.getStatusCode().equals(Token.StatusCode.CANCELLED))
         {
         	return "Token cancelled";
