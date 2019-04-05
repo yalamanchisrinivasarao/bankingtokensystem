@@ -33,26 +33,26 @@ Import as *Existing Maven Project* and run it as *Spring Boot App*.
 
 - Run the application and go on http://localhost:8080/
 
-### Resources
+### Controller
 
-#### HomeResource
+#### HomeController
     GET / Welcome 
 
-#### CustomerResource
+#### CustomerController
     POST /customers Create a new Customer
     GET /customers/{mobile} Lookup customer via mobile
 
-#### TokenResource
+#### TokenController
     GET /tokens Gives a counter wise list of active tokens
     POST /tokens Generates a new token, takes customer and service(s) as input
     PUT /tokens/{tokenNumber}/cancel Cancels an active token
     PUT /tokens/{tokenNumber}/complete Marks a service token a complete, in case the token is a multi-counter token, it gets queued at the next counter
     PUT /tokens/{tokenNumber}/comment Records a comment against the current service of the token
             
-#### ServiceResource
+#### ServiceController
     GET /services List all the available banking services, some services are multi-counter
      
-#### CounterResource
+#### CounterController
     GET /counters List all the counters
 
 ### Token Generation Strategy
