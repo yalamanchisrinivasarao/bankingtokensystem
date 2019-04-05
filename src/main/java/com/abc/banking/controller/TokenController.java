@@ -33,20 +33,20 @@ public class TokenController {
 
     @Secured({"USER", "ADMIN"})
     @RequestMapping(value = "/tokens/{tokenNumber}/comment", method = RequestMethod.PUT)
-    public String comment(@PathVariable("tokenNumber") @NotNull int tokenNumber, @RequestBody String comments) {
-    	return tokenService.createTokenComment(tokenNumber, comments);
+    public void comment(@PathVariable("tokenNumber") @NotNull int tokenNumber, @RequestBody String comments) {
+    	tokenService.createTokenComment(tokenNumber, comments);
     }
 
     @Secured("ADMIN")
     @RequestMapping(value = "/tokens/{tokenNumber}/cancel", method = RequestMethod.PUT)
-    public String cancel(@PathVariable("tokenNumber") @NotNull int tokenNumber) {
-    	return tokenService.markTokenAsCancel(tokenNumber);
+    public void cancel(@PathVariable("tokenNumber") @NotNull int tokenNumber) {
+    	tokenService.markTokenAsCancel(tokenNumber);
     }
 
     @Secured("ADMIN")
     @RequestMapping(value = "/tokens/{tokenNumber}/complete", method = RequestMethod.PUT)
-    public String complete(@PathVariable("tokenNumber") @NotNull int tokenNumber) {
-    	return tokenService.markTokenAsComplete(tokenNumber);    
+    public void complete(@PathVariable("tokenNumber") @NotNull int tokenNumber) {
+    	tokenService.markTokenAsComplete(tokenNumber);    
     }
 
 }
