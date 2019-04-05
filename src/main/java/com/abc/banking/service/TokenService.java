@@ -81,7 +81,7 @@ public class TokenService {
     }
 
     @Transactional
-    public String createTokenComment(int tokenNumber, String comments) {
+    public void createTokenComment(int tokenNumber, String comments) {
         Token token = checkTokenValidity(tokenNumber);
         TokenServiceMapping current =
                 token.getTokenServices()
@@ -89,27 +89,18 @@ public class TokenService {
                         .filter(tsm -> tsm.getService().getId() == token.getCurrentService().getId())
                         .findFirst().get();
         current.setComments(comments);
-        return "Comment added for token " + token.getNumber();
     }
 
     @Transactional
-    public String markTokenAsCancel(int tokenNumber) {
+    public void markTokenAsCancel(int tokenNumber) {
         Token token = checkTokenValidity(tokenNumber);
         Counter counter = token.getCurrentCounter();
         token.setStatusCode(Token.StatusCode.CANCELLED);
         counterService.decrmentQueueSize(counter.getId());
-        if(token.getStatusCode().equals(Token.StatusCode.CANCELLED))
-        {
-        	return "Token cancelled";
-        }
-        else 
-        {
-        	return "Token cancel failed";
-        }
     }
 
     @Transactional
-    public String markTokenAsComplete(int tokenNumber) {
+    public void markTokenAsComplete(int tokenNumber) {
         Token token = checkTokenValidity(tokenNumber);
         Counter counter = token.getCurrentCounter();
         counterService.decrmentQueueSize(counter.getId());
@@ -130,14 +121,6 @@ public class TokenService {
             token.setCurrentCounter(nextCounter);
         } else {
             token.setStatusCode(Token.StatusCode.COMPLETED);
-        }
-        if(token.getStatusCode().equals(Token.StatusCode.COMPLETED)) 
-        {
-        	return "Token " + token.getNumber() + " completed or sent to next counter ";
-        }
-        else
-        {
-        	return "Token " + token.getNumber() + " complete failed ";
         }
     }
 
