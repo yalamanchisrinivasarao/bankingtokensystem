@@ -3,6 +3,8 @@ package com.abc.banking.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -11,9 +13,14 @@ import java.util.List;
  */
 @Entity
 @Table(name = "token")
-public class Token {
+public class Token implements Serializable {
 
-    public enum StatusCode {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public enum StatusCode {
         ACTIVE,
         CANCELLED,
         COMPLETED

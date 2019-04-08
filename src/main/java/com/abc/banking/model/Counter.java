@@ -1,6 +1,8 @@
 package com.abc.banking.model;
 
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 /**
@@ -8,9 +10,14 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "counter")
-public class Counter {
+public class Counter implements Serializable{
 
-    public enum Priority {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public enum Priority {
         HIGH,
         NORMAL
     }

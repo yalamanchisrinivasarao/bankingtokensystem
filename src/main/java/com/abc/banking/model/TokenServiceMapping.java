@@ -1,6 +1,8 @@
 package com.abc.banking.model;
 
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -9,9 +11,14 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "token_service_mapping")
-public class TokenServiceMapping {
+public class TokenServiceMapping implements Serializable {
 
-    public TokenServiceMapping() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public TokenServiceMapping() {
     }
 
     public TokenServiceMapping(Token token, ServiceEntity service) {

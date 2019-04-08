@@ -1,6 +1,8 @@
 package com.abc.banking.model;
 
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -9,9 +11,14 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "service_counter_mapping")
-public class ServiceCounterMapping {
+public class ServiceCounterMapping implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 

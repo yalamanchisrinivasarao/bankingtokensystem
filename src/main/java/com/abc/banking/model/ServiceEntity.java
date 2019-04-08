@@ -2,6 +2,8 @@ package com.abc.banking.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,9 +11,14 @@ import java.util.List;
  */
 @Entity
 @Table(name = "service")
-public class ServiceEntity {
+public class ServiceEntity implements Serializable {
 
-    public enum Type {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public enum Type {
         PREMIUM,
         REGULAR
     }
