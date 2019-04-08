@@ -24,6 +24,15 @@ Run the file install_schema.sql present in src/main/resources to set up the data
 - token
 - token_service_mapping
 
+ER Diagram
+
+Please refer the ER Diagram.mwb
+
+Class Diagram
+
+Please refer ClassDiagram.ucls
+
+
 #### From Editor (IntelliJ or Eclipse)
 
 Import as *Existing Maven Project* and run it as *Spring Boot App*.
@@ -32,6 +41,8 @@ Import as *Existing Maven Project* and run it as *Spring Boot App*.
 ### Usage
 
 - Run the application and go on http://localhost:8080/
+
+
 
 ### Controller
 

@@ -34,16 +34,16 @@ public class CustomerServiceTest {
     public void testFindByMobile()
     {
     	Customer daoCustomer = new Customer();
-        
-    	daoCustomer.setName("Srinivasa Rao Yalamanchi");
-        daoCustomer.setMobile("8669083993");
-        
-        when(customerDao.findByMobile("8669083993")).thenReturn(daoCustomer);
+		
+		daoCustomer.setName("Srinivasa Yalamanchi12");
+		daoCustomer.setMobile("8669083912");
+		
+		when(customerDao.findByMobile("8669083912")).thenReturn(daoCustomer);
          
-        Customer serviceCustomer = customerService.findByMobile("8669083993");
+        Customer serviceCustomer = customerService.findByMobile("8669083912");
          
-        assertEquals("8669083993", serviceCustomer.getMobile());
-        assertEquals("Srinivasa Rao Yalamanchi", serviceCustomer.getName());
+        assertEquals("8669083912", serviceCustomer.getMobile());
+        assertEquals("Srinivasa Yalamanchi12", serviceCustomer.getName());
     }
      
     @Test

@@ -1,6 +1,6 @@
 package com.abc.banking.controller;
 
-import com.abc.banking.model.TokenRequest;
+import com.abc.banking.dto.TokenRequest;
 import com.abc.banking.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;

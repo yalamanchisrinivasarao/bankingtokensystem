@@ -24,7 +24,7 @@ public class CustomerControllerTest extends AbstractTest {
 
    @Test
    public void testFindByMobile() throws Exception {
-      String uri = "/customers/8669083993";
+      String uri = "/customers/8669083911";
       MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
          .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
       
@@ -48,9 +48,9 @@ public class CustomerControllerTest extends AbstractTest {
       address.setState("Telanagana");
       address.setZipCode("500018");
       Customer customer = new Customer();
-      customer.setName("Srinivasa Yalamanchi11");
+      customer.setName("Srinivasa Yalamanchi12");
       customer.setAddress(address);
-      customer.setMobile("8669083911");
+      customer.setMobile("8669083912");
       customer.setCreated(address.getCreated());
       String inputJson = super.mapToJson(customer);
       MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri)
@@ -61,6 +61,6 @@ public class CustomerControllerTest extends AbstractTest {
       assertEquals(200, status);
       String content = mvcResult.getResponse().getContentAsString();
       Customer createdCustomer = super.mapFromJson(content, Customer.class);
-      assertTrue((createdCustomer.getMobile().equals("8669083911")));
+      assertTrue((createdCustomer.getMobile().equals("8669083912")));
    }
 }
