@@ -1,4 +1,3 @@
-
 ## ABC​ ​Banking
 
 ### Build and run
@@ -24,10 +23,13 @@ Run the file install_schema.sql present in src/main/resources to set up the data
 - service_counter_mapping
 - token
 - token_service_mapping
+- user
+- role
+- user_role
 
 ER Diagram
 
-Please refer the ER Diagram.mwb
+Please refer the ERDiagram.mwb
 
 Class Diagram
 
