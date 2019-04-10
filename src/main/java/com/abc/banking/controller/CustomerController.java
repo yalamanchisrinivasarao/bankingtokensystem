@@ -4,7 +4,7 @@ import com.abc.banking.service.CustomerService;
 import com.abc.banking.exception.BusinessException;
 import com.abc.banking.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,13 +20,13 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @Secured({"USER", "ADMIN"})
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @RequestMapping(value="/customers/{mobile}", method = RequestMethod.GET)
     public Customer findByMobile(@PathVariable("mobile") @NotNull String mobile) {
         return findByMobileNumber(mobile);
     }
 
-    @Secured({"USER", "ADMIN"})
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @RequestMapping(value = "/customers", method = RequestMethod.POST)
     public Customer create(@RequestBody @NotNull @Valid Customer customer) {
         Customer existing = findByMobileNumber(customer.getMobile());

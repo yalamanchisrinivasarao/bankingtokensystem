@@ -2,11 +2,39 @@ CREATE DATABASE `banking_token_system` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 drop table if exists token_service_mapping;
 drop table if exists token;
-drop table  if exists service_counter_mapping;
-drop table  if exists counter;
-drop table  if exists service;
-drop table  if exists customer;
-drop table  if exists address;
+drop table if exists service_counter_mapping;
+drop table if exists counter;
+drop table if exists service;
+drop table if exists customer;
+drop table if exists address;
+drop table if exists user_role;
+drop table if exists user;
+drop table if exists role;
+
+
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `active` int(11) DEFAULT NULL,
+  `lastname` varchar(255) NOT NULL,
+  `firstname` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `role` (
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `user_role` (
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`,`role_id`),
+  UNIQUE KEY `UK_it77eq964jhfqtu54081ebtio` (`role_id`),
+  CONSTRAINT `FK859n2jvi8ivhui0rl0esws6o` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `FKa68196081fvovjhkek5m97n3y` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `address` (
@@ -92,6 +120,14 @@ CREATE TABLE `token_service_mapping` (
   CONSTRAINT `FK_tnaur3gcarua7he418wdytlnb` FOREIGN KEY (`token_id`) REFERENCES `token` (`id`)
 ) ENGINE=InnoDB;
 
+insert into user values(1,1,'Srini','sriniadmin','12345');
+insert into user values(2,1,'Srini','sriniuser','12345');
+
+insert into role values(1,'ADMIN');
+insert into role values(2,'USER');
+
+insert into user_role values(1,1);
+insert into user_role values(2,2);
 
 insert into counter values (null, 1, 'HIGH', 0);
 insert into counter values (null, 2, 'HIGH', 0);
