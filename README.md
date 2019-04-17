@@ -79,6 +79,8 @@ Import as *Existing Maven Project* and run it as *Spring Boot App*.
   "customerMobile": "8669083993",
   "services" : ["A"]
 }
+
+
     PUT /tokens/{tokenNumber}/cancel Cancels an active token
     PUT /tokens/{tokenNumber}/complete Marks a service token a complete, in case the token is a multi-counter token, it gets queued at the next counter
     PUT /tokens/{tokenNumber}/comment Records a comment against the current service of the token
