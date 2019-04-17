@@ -54,11 +54,31 @@ Import as *Existing Maven Project* and run it as *Spring Boot App*.
 
 #### CustomerController
     POST /customers Create a new Customer
+    
+    {
+  "name": "Srinivasa Rao Yalamanchi",
+  "mobile": "8669083993",
+  "type": "PREMIUM",
+  "address": {
+    "name": "Srinivasa Rao Yaamanchi",
+    "addressLine1": "Near Jaiswal Hospital",
+    "addressLine2": "Moti Nagar",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "zipCode": "500018"
+  }
+}
+
     GET /customers/{mobile} Lookup customer via mobile
 
 #### TokenController
     GET /tokens Gives a counter wise list of active tokens
     POST /tokens Generates a new token, takes customer and service(s) as input
+    
+    {
+  "customerMobile": "8669083993",
+  "services" : ["A"]
+}
     PUT /tokens/{tokenNumber}/cancel Cancels an active token
     PUT /tokens/{tokenNumber}/complete Marks a service token a complete, in case the token is a multi-counter token, it gets queued at the next counter
     PUT /tokens/{tokenNumber}/comment Records a comment against the current service of the token
