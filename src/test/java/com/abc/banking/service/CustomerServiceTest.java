@@ -11,15 +11,18 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import com.abc.banking.AbstractTest;
 import com.abc.banking.dao.CustomerDao;
 import com.abc.banking.model.Address;
 import com.abc.banking.model.Customer;
+import com.abc.banking.service.impl.CustomerServiceImpl;
  
  
-public class CustomerServiceTest {
+public class CustomerServiceTest extends AbstractTest {
      
     @InjectMocks
-    CustomerService customerService;
+    CustomerServiceImpl customerService;
      
     @Mock
     CustomerDao customerDao;
@@ -30,7 +33,7 @@ public class CustomerServiceTest {
     }
      
      
-    @Test
+    @Test    
     public void testFindByMobile()
     {
     	Customer daoCustomer = new Customer();
@@ -58,9 +61,9 @@ public class CustomerServiceTest {
         address.setState("Telanagana");
         address.setZipCode("500018");
         Customer customer = new Customer();
-        customer.setName("Srinivasa Yalamanchi13");
+        customer.setName("Srinivasa Yalamanchi16");
         customer.setAddress(address);
-        customer.setMobile("8669083913");
+        customer.setMobile("8669083916");
         customer.setCreated(address.getCreated());
         
          

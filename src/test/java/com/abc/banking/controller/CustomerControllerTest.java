@@ -12,6 +12,7 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -23,8 +24,9 @@ public class CustomerControllerTest extends AbstractTest {
    }
 
    @Test
+   @WithMockUser(roles={"USER","ADMIN"})
    public void testFindByMobile() throws Exception {
-      String uri = "/customers/8669083911";
+      String uri = "/customers/8669083912";
       MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
          .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
       
@@ -37,6 +39,7 @@ public class CustomerControllerTest extends AbstractTest {
    
 
    @Test
+   @WithMockUser(roles={"USER","ADMIN"})
    public void testCreate() throws Exception {
       String uri = "/customers";
       
@@ -50,7 +53,7 @@ public class CustomerControllerTest extends AbstractTest {
       Customer customer = new Customer();
       customer.setName("Srinivasa Yalamanchi12");
       customer.setAddress(address);
-      customer.setMobile("8669083912");
+      customer.setMobile("8669083914");
       customer.setCreated(address.getCreated());
       String inputJson = super.mapToJson(customer);
       MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri)
@@ -61,6 +64,6 @@ public class CustomerControllerTest extends AbstractTest {
       assertEquals(200, status);
       String content = mvcResult.getResponse().getContentAsString();
       Customer createdCustomer = super.mapFromJson(content, Customer.class);
-      assertTrue((createdCustomer.getMobile().equals("8669083912")));
+      assertTrue((createdCustomer.getMobile().equals("8669083914")));
    }
 }
